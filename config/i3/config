@@ -19,7 +19,6 @@ for_window [instance="pavucontrol"] floating enable, border normal 2
 ########################################################################## }}}
 #### KeyBindings {{{
 
-bindsym $mod+y exec ~/test.sh
 # Remap some keybindings
 bindsym --release $mod+c exec --no-startup-id ~/.config/i3/scripts/copy-paste-wrapper.sh copy
 bindsym --release $mod+v exec --no-startup-id ~/.config/i3/scripts/copy-paste-wrapper.sh paste
@@ -68,16 +67,24 @@ bindsym $mod+Shift+a focus child
 bindsym $mod+m unmark toswap; mark toswap
 bindsym $mod+Shift+m swap container with mark toswap
 
+
+################### FOCUS #############################################################
 # change focus
 #bindsym $mod+h exec --no-startup-id ~/.config/i3/scripts/i3-tmux-focus-switch.sh left left
 #bindsym $mod+j exec --no-startup-id ~/.config/i3/scripts/i3-tmux-focus-switch.sh down bottom
 #bindsym $mod+k exec --no-startup-id ~/.config/i3/scripts/i3-tmux-focus-switch.sh up top
 #bindsym $mod+l exec --no-startup-id ~/.config/i3/scripts/i3-tmux-focus-switch.sh right right
 
-bindsym $mod+h exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus left
-bindsym $mod+j exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus down
-bindsym $mod+k exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus up
-bindsym $mod+l exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus right
+#bindsym $mod+h exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus left
+#bindsym $mod+j exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus down
+#bindsym $mod+k exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus up
+#bindsym $mod+l exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus right
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+#######################################################################################
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -192,7 +199,8 @@ bar {
     #font pango:DejaVu Sans Mono, FontAwesome 10
     workspace_min_width 25
     position top
-    status_command py3status -c ~/.config/i3/py3status.conf
+    status_command i3status
+#   status_command py3status -c ~/.config/i3/py3status.conf
     #status_command i3status-rs ~/.config/i3/i3status-rust/config.toml
 #    colors {
 #        separator #666666
