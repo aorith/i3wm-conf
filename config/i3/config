@@ -42,7 +42,7 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec xterm -name 'tmux' -e 'tmux -u attach || tmux -u new-session'
 bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec xterm
+bindsym $mod+Shift+Return exec alacritty -e ranger
 
 # kill focused window
 bindsym $mod+q kill
