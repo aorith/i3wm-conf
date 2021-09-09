@@ -1,12 +1,8 @@
 CURRUID := $(shell id -u)
 OS := $(shell uname -s)
 
-HOMEFILES := $(shell find home -maxdepth 1 -mindepth 1 -type f) # home/xinitrc
-# make won't run the target if the file exists, so we append a non existing path here:
-DOTFILES := $(addprefix target/,$(HOMEFILES)) # eg: target/home/xinitrc
-
-# The same logic is applied here
-CONFIGFILES := $(addprefix target/,$(shell find config -maxdepth 1 -mindepth 1)) # eg: target/config/i3
+DOTFILES := $(shell find home -maxdepth 1 -mindepth 1) # eg: home/xinitrc
+CONFIGFILES := $(shell find config -maxdepth 1 -mindepth 1) # eg: config/i3
 
 ifeq ($(CURRUID), 0)
   $(error Do not run as root)
@@ -16,26 +12,25 @@ ifneq ($(OS), Linux)
 endif
 
 # https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
-# TLDR: targets that don't create a file
-.PHONEY: link
+# TLDR: targets that don't expect the creation of a file, so make won't complain if the file exists
+.PHONY: link unlink $(DOTFILES) $(CONFIGFILES)
 
 main: link
 
 # https://www.gnu.org/software/make/manual/make.html#Prerequisite-Types
 link: | $(DOTFILES) $(CONFIGFILES)
 
-# Target for each dotfile, eg: "target/home/xinitrc" is a target
+# Target for each dotfile, eg: "home/xinitrc" is a target
 # "notdir" is just like basename
 # we add the '.' here to all the files
 $(DOTFILES):
 	@echo -e "\nLinking dotfiles"
-	@# If target exists, and is not a link, tell me about it
+	@# If target exists, and is not a link, let me know
 	@(test -e "$(HOME)/.$(notdir $@)" && ! test -L "$(HOME)/.$(notdir $@)") && { echo "Target exists, delete or move it: $(HOME)/.$(notdir $@)"; exit 1; } || true
 	@ln -snfv "$(PWD)/home/$(notdir $@)" "$(HOME)/.$(notdir $@)"
 
 $(CONFIGFILES):
 	@echo -e "\nLinking configfiles"
-	@# If target exists, and is not a link, tell me about it
 	@(test -e "$(HOME)/.config/$(notdir $@)" && ! test -L "$(HOME)/.config/$(notdir $@)") && { echo "Target exists, delete or move it: $(HOME)/.config/$(notdir $@)"; exit 1; } || true
 	@ln -snfv "$(PWD)/config/$(notdir $@)" "$(HOME)/.config/$(notdir $@)"
 
