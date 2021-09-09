@@ -13,7 +13,7 @@ endif
 
 # https://www.gnu.org/software/make/manual/html_node/Phony-Targets.html
 # TLDR: targets that don't expect the creation of a file, so make won't complain if the file exists
-.PHONY: link unlink $(DOTFILES) $(CONFIGFILES)
+.PHONY: link unlink fixrepo $(DOTFILES) $(CONFIGFILES)
 
 main: link
 
@@ -40,3 +40,6 @@ unlink:
 	@for f in $(DOTFILES); do t="$(HOME)/.$$(basename $$f)"; [[ -L "$$t" ]] && rm -v "$$t" || true; test -e "$$t" && echo "Not removing $$t" || true; done
 	@echo -e "\nUnlinking configfiles"
 	@for f in $(CONFIGFILES); do t="$(HOME)/.config/$$(basename $$f)"; test -L "$$t" && rm -v "$$t" || true; test -e "$$t" && echo "Not removing $$t" || true; done
+
+fixrepo:
+	sed -i "s,url = https://github.com/aorith/$$(basename $$PWD),url = git@github.com:aorith/$$(basename $$PWD).git,g" ".git/config"
