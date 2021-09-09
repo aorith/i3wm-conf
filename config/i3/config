@@ -3,6 +3,7 @@
 #### Basic config {{{
 set $mod Mod4
 set $locker ~/.config/i3/scripts/lock.sh
+set $terminal alacritty
 #font -xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso10646-1
 font pango:Fixedsys Excelsior 12
 focus_follows_mouse no
@@ -40,7 +41,8 @@ bindsym Print exec --no-startup-id flameshot gui
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xterm -name 'tmux' -e 'tmux -u attach || tmux -u new-session'
+#bindsym $mod+Return exec xterm -name 'tmux' -e 'tmux -u attach || tmux -u new-session'
+bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+Return exec xterm
 
 # kill focused window
