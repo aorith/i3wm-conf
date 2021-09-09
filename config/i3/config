@@ -4,8 +4,7 @@
 set $mod Mod4
 set $locker ~/.config/i3/scripts/lock.sh
 set $terminal alacritty
-#font -xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso10646-1
-font pango:Fixedsys Excelsior 12
+font pango:Fixedsys Excelsior 3.01 12
 focus_follows_mouse no
 default_border pixel 2
 default_floating_border normal 2
@@ -94,18 +93,17 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# toggle split
-bindsym $mod+BackSpace split toggle
-# toggle layouts
-bindsym $mod+Shift+BackSpace layout toggle tabbed splith splitv
-
 # enter fullscreen mode for the focused container
 bindsym $mod+z fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+r layout stacking
+# tabbed layout
 bindsym $mod+t layout tabbed
+# toggle split
 bindsym $mod+e layout toggle split
+
+# splits
+bindsym $mod+v split v
+bindsym $mod+b split h
 
 # toggle tiling / floating
 bindsym $mod+f floating toggle; border normal 2
@@ -196,14 +194,13 @@ bindsym $mod+shift+q mode "$mode_system"
 #### }}}
 #### Status Bar {{{
 bar {
-    #font fixed
-    font pango:Fixedsys Excelsior 12
-    #font pango:DejaVu Sans Mono, FontAwesome 10
+    #font pango:Fixedsys Excelsior 3.01 12
+    font pango:DejaVu Sans Mono, FontAwesome 10
     workspace_min_width 25
     position top
-    status_command i3status
+    #status_command i3status
 #   status_command py3status -c ~/.config/i3/py3status.conf
-    #status_command i3status-rs ~/.config/i3/i3status-rust/config.toml
+    status_command i3status-rs ~/.config/i3/i3status-rust/config.toml
 #    colors {
 #        separator #666666
 #        background #222222
