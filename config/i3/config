@@ -4,7 +4,10 @@
 set $mod Mod4
 set $locker ~/.config/i3/scripts/lock.sh
 set $terminal alacritty
-font pango:Fixedsys Excelsior 3.01 12
+set $font JetBrainsMono Nerd Font, FontAwesome 10
+
+font pango:$font
+
 focus_follows_mouse no
 default_border pixel 2
 default_floating_border normal 2
@@ -38,6 +41,7 @@ bindsym Print exec --no-startup-id flameshot gui
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+floating_minimum_size 55 x 30
 
 # start a terminal
 #bindsym $mod+Return exec xterm -name 'tmux' -e 'tmux -u attach || tmux -u new-session'
@@ -194,22 +198,19 @@ bindsym $mod+shift+q mode "$mode_system"
 #### }}}
 #### Status Bar {{{
 bar {
-    #font pango:Fixedsys Excelsior 3.01 12
-    font pango:DejaVu Sans Mono, FontAwesome 10
-    workspace_min_width 25
+    font pango:$font
+    workspace_min_width 30
     position top
-    #status_command i3status
-#   status_command py3status -c ~/.config/i3/py3status.conf
     status_command i3status-rs ~/.config/i3/i3status-rust/config.toml
-#    colors {
-#        separator #666666
-#        background #222222
-#        statusline #dddddd
-#        focused_workspace #0088CC #0088CC #ffffff
-#        active_workspace #333333 #333333 #ffffff
-#        inactive_workspace #333333 #333333 #888888
-#        urgent_workspace #2f343a #900000 #ffffff
-#    }
+    colors {
+        separator #666666
+        background #222222
+        statusline #dddddd
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace #2f343a #900000 #ffffff
+    }
 }
 ########################################################################## }}}
 #### Startup programs {{{
