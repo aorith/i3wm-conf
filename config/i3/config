@@ -10,15 +10,20 @@ font pango:$font
 
 focus_follows_mouse no
 default_border pixel 2
-default_floating_border normal 2
+default_floating_border normal
 ########################################################################## }}}
 #### Window Rules {{{
-for_window [class="(i?)floating"] floating enable, border normal 2
-for_window [class="Sxiv"] floating enable, border normal 2
-for_window [class="mpv"] floating enable, border normal 2
-for_window [instance="(i?)floating"] floating enable, border normal 2
-for_window [instance="scratchpad.tmux"] move scratchpad, floating enable, border normal 1
-for_window [instance="pavucontrol"] floating enable, border normal 2
+# default_floating_border only works for windows that start as floating
+# not for windows that made floating thereafter
+for_window [floating] border normal
+for_window [class="(i?)floating"] floating enable
+for_window [class="Sxiv"] floating enable
+for_window [class="mpv"] floating enable
+for_window [instance="(i?)floating"] floating enable
+for_window [instance="scratchpad.tmux"] move scratchpad, floating enable
+for_window [instance="pavucontrol"] floating enable
+for_window [class=".virt-manager-wrapped"] floating enable
+
 ########################################################################## }}}
 #### KeyBindings {{{
 
