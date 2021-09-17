@@ -1,5 +1,9 @@
 # vim: fdm=marker foldlevel=0
 
+include test
+workspace_layout tabbed
+title_align center
+
 #### Basic config {{{
 set $mod Mod4
 set $locker ~/.config/i3/scripts/lock.sh
@@ -59,7 +63,8 @@ bindsym $mod+q kill
 # Rofi
 bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
 bindsym $mod+Shift+space exec --no-startup-id rofi -show run
-bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-thumbnail
+#bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-thumbnail
+bindsym Mod1+Tab focus right
 
 # Next tab
 bindsym $mod+Tab exec --no-startup-id ~/.config/i3/scripts/i3-focus.py tab next
