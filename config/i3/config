@@ -221,10 +221,17 @@ bar {
     tray_output primary
     bindsym button4 nop
     bindsym button5 nop
+
+    colors {
+        background #0d0f13
+        statusline #81a1c1
+    }
 }
 ########################################################################## }}}
 #### Startup programs {{{
-exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh
+exec --no-startup-id autorandr -c
+exec --no-startup-id hsetroot -solid '#0d0f13'
+#exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $locker --nofork
 #exec --no-startup-id blueman-applet
 #exec --no-startup-id nm-applet
