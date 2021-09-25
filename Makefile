@@ -19,7 +19,7 @@ main: link
 
 # https://www.gnu.org/software/make/manual/make.html#Prerequisite-Types
 link: | $(DOTFILES) $(CONFIGFILES)
-	@$(PWD)/config/i3/i3status-rust/link.sh
+	@#$(PWD)/config/i3/i3status-rust/link.sh
 
 # Target for each dotfile, eg: "home/xinitrc" is a target
 # "notdir" is just like basename
