@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # intel driver = LVDS1, modesetting driver = LVDS-1
 [[ "$(xrandr | grep -w 'connected' | head -1 | awk '{print $1}')" =~ - ]] && D='-' || D=''
@@ -9,7 +9,8 @@ DP1="DP${D}1"
 VGA1="VGA${D}1"
 
 # resolution
-DP1_res="--mode 2560x1440"
+DP1_res="--mode 1920x1080"
+#DP1_res="--mode 2560x1440"
 #DP1_res="--mode 3840x2160"
 
 connected_monitors="$(xrandr | grep -w connected | awk '{print $1}')"
