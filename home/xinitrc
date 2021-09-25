@@ -5,6 +5,7 @@ xset r rate 300 36
 xset fp rehash
 xsetroot -cursor_name left_ptr
 
+# NOTE: Logitech MX Keys FN keys can be switched by pressing fn+ESC
 #xmodmap - <<EOF
 #clear lock
 #keycode 66 = Home
@@ -12,4 +13,13 @@ xsetroot -cursor_name left_ptr
 
 #autocutsel -fork &
 
-exec i3
+if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+    eval $(dbus-launch --exit-with-session --sh-syntax)
+fi
+systemctl --user import-environment DISPLAY XAUTHORITY
+
+if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+    dbus-update-activation-environment DISPLAY XAUTHORITY
+fi
+
+exec ${WM:-i3}
