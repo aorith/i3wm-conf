@@ -1,3 +1,4 @@
+SHELL = /bin/bash
 CURRUID := $(shell id -u)
 OS := $(shell uname -s)
 
