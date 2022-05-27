@@ -75,4 +75,5 @@ exec --no-startup-id nm-applet
 exec --no-startup-id dunst
 exec --no-startup-id unclutter -b
 exec --no-startup-id setxkbmap es
+exec_always --no-startup-id feh --bg-scale Pictures/all_pixels.png
 exec_always --no-startup-id picom --daemon --config ~/.config/picom/picom.conf
