@@ -135,3 +135,15 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 bindsym $mod+shift+q mode "$mode_system"
+
+set $mode_gromit (t) Toggle, (c) Clear, (u) Undo, (r) Redo, (v) Visibility, (q) Quit, (m) Leave mode
+mode "$mode_gromit" {
+    bindsym t exec bash -lic 'gromit-mpx --toggle'
+    bindsym c exec gromit-mpx --clear
+    bindsym u exec gromit-mpx --undo
+    bindsym r exec gromit-mpx --redo
+    bindsym v exec gromit-mpx --visibility
+    bindsym q exec gromit-mpx --quit, mode "default"
+    bindsym m mode "default"
+}
+bindsym $mod+p exec gromit-mpx --active, mode "$mode_gromit"
