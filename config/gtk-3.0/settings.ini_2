@@ -1,8 +1,0 @@
-[Settings]
-gtk-application-prefer-dark-theme=true
-gtk-button-images=false
-gtk-font-name=Roboto
-gtk-icon-theme-name=ePapirus
-gtk-menu-images=false
-gtk-theme-name=Layan-light-solid
-gtk-toolbar-style=GTK_TOOLBAR_ICONS

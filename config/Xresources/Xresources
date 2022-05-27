@@ -3,7 +3,7 @@
 #include "apprentice"
 
 !-------- Xft Settings {{{
-Xft.dpi: 96
+Xft.dpi: 108
 Xft.autohint: false
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintsfull

@@ -1,247 +1,78 @@
 # vim: fdm=marker foldlevel=0
 
-#### Basic config {{{
+# Definitions
+# -----------------------------------------------------------------------------
 set $mod Mod4
+set $font DejaVu Sans Mono 9
+set $statusfont Iosevka Aile 10
 set $locker ~/.config/i3/scripts/lock.sh
 set $terminal alacritty
-#set $font JetBrains Mono, FontAwesome 10
-set $font Iosevka Aile 10
 
-font pango:$font
+set $left h
+set $right l
+set $up k
+set $down j
 
-#workspace_layout tabbed
-title_align center
-focus_follows_mouse no
-default_border pixel 3
-default_floating_border pixel 3
-for_window [class=".*"] border pixel 3
-hide_edge_borders smart
-
-########################################################################## }}}
-#### Window Rules {{{
-# default_floating_border only works for windows that start as floating
-# not for windows that made floating thereafter
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [title="Preferences$"] floating enable
-
-for_window [floating] border normal
-for_window [class="(i?)floating"] floating enable
-for_window [class="Sxiv"] floating enable
-for_window [class="mpv"] floating enable
-for_window [instance="(i?)floating"] floating enable
-for_window [instance="scratchpad.tmux"] move scratchpad, floating enable
-for_window [instance="pavucontrol"] floating enable
-for_window [class=".virt-manager-wrapped"] floating enable
-for_window [class=".arandr-wrapped"] floating enable
-
-########################################################################## }}}
-#### KeyBindings {{{
-
-# Remap some keybindings
-#bindsym --release $mod+c exec --no-startup-id ~/.config/i3/scripts/copy-paste-wrapper.sh copy
-#bindsym --release $mod+v exec --no-startup-id ~/.config/i3/scripts/copy-paste-wrapper.sh paste
-#bindsym --release $mod+x exec --no-startup-id ~/.config/i3/scripts/copy-paste-wrapper.sh cut
-
-bindsym $mod+masculine exec --no-startup-id ~/.config/i3/scripts/scratchpad-term.sh
-
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Capture screen
-bindsym Print exec --no-startup-id flameshot gui
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
-floating_minimum_size 55 x 30
-
-# start a terminal
-#bindsym $mod+Return exec xterm -name 'tmux' -e 'tmux -u attach || tmux -u new-session'
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty -e ranger
-
-# kill focused window
-bindsym $mod+q kill
-
-# Rofi
-bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
-bindsym $mod+Shift+space exec --no-startup-id rofi -show run
-#bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-thumbnail
-bindsym Mod1+Tab focus right
-
-# Next tab
-#bindsym $mod+Tab exec --no-startup-id ~/.config/i3/scripts/i3-focus.py tab next
-# Prev tab
-#bindsym $mod+Shift+Tab exec --no-startup-id ~/.config/i3/scripts/i3-focus.py tab prev
-
-# Sticky toggle
-bindsym $mod+i sticky toggle
-
-# focus parent/child
-bindsym $mod+a focus parent
-bindsym $mod+Shift+a focus child
-
-# marks to swap containers
-bindsym $mod+m unmark toswap; mark toswap
-bindsym $mod+Shift+m swap container with mark toswap
-
-
-################### FOCUS #############################################################
-# change focus
-#bindsym $mod+h exec --no-startup-id ~/.config/i3/scripts/i3-tmux-focus-switch.sh left left
-#bindsym $mod+j exec --no-startup-id ~/.config/i3/scripts/i3-tmux-focus-switch.sh down bottom
-#bindsym $mod+k exec --no-startup-id ~/.config/i3/scripts/i3-tmux-focus-switch.sh up top
-#bindsym $mod+l exec --no-startup-id ~/.config/i3/scripts/i3-tmux-focus-switch.sh right right
-
-#bindsym $mod+h exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus left
-#bindsym $mod+j exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus down
-#bindsym $mod+k exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus up
-#bindsym $mod+l exec --no-startup-id ~/.config/i3/scripts/i3-focus.py focus right
-
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
-#######################################################################################
-
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
-
-# enter fullscreen mode for the focused container
-bindsym $mod+z fullscreen toggle
-
-# tabbed layout
-bindsym $mod+t layout tabbed
-# toggle split
-bindsym $mod+e layout toggle split
-
-# splits
-bindsym $mod+v split v
-bindsym $mod+b split h
-
-# toggle tiling / floating
-bindsym $mod+f floating toggle; border normal 2
-# change focus between tiling / floating windows
-bindsym $mod+Shift+f focus mode_toggle
-# toggle border
-bindsym $mod+comma border toggle
-
-#### Workspaces {{{
-# Move workspaces around monitors
-bindsym $mod+Left move workspace to output left
-bindsym $mod+Right move workspace to output right
-bindsym $mod+Up move workspace to output up
-bindsym $mod+Down move workspace to output down
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
+set $ws1 "1: Chat"
+set $ws2 "2: Web"
+set $ws3 "3: Dev"
+set $ws4 "4: Misc"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
+set $ws8 "8: Extra"
+set $ws9 "9: Other"
 set $ws10 "10"
 
-# switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+set $output1 HDMI-0
+set $output2 DP-0
 
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
-# }}}
-# Monitor Menu {{{
-set $mode_display (a)Auto // (d)DP1, (v)VGA1, (l)LVDS1 // (S-d)DP1 off, (S-v)VGA1 off, (S-l) LVDS1 off
-mode "$mode_display" {
-    bindsym a exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh auto, mode "default"
+workspace $ws1 output $output1
+workspace $ws2 output $output2
+workspace $ws3 output $output2
+workspace $ws4 output $output2
+workspace $ws5 output $output2
+workspace $ws6 output $output2
+workspace $ws7 output $output2
+workspace $ws8 output $output1
+workspace $ws9 output $output2
+workspace $ws2 output $output2
 
-    bindsym d exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh on DP1, mode "default"
-    bindsym v exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh on VGA1, mode "default"
-    bindsym l exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh on LVDS1, mode "default"
+# Basic Config
+# -----------------------------------------------------------------------------
 
-    bindsym Shift+d exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh off DP1, mode "default"
-    bindsym Shift+v exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh off VGA1, mode "default"
-    bindsym Shift+l exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh off LVDS1, mode "default"
+font pango:$font
+title_align center
+focus_follows_mouse no
 
-    # back to normal
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+F3 mode "$mode_display"
-# }}}
-# Poweroff Menu {{{
-set $mode_system (s)Shutdown, (r)Reboot, (l)Lock, (q)Quit, (d)Suspend, (x)Reload-i3, (Shift+X)Restart-i3
-mode "$mode_system" {
-    bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym l exec --no-startup-id $locker, mode "default"
-    bindsym q exec --no-startup-id i3-msg exit, mode "default"
-    bindsym d exec --no-startup-id $locker && systemctl suspend, mode "default"
-    bindsym x exec --no-startup-id i3-msg reload, mode "default"
-    bindsym Shift+x exec --no-startup-id i3-msg restart, mode "default"
+default_border pixel 3
+default_floating_border pixel 3
+floating_modifier $mod
+floating_minimum_size 55 x 30
 
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+shift+q mode "$mode_system"
-# }}}
-#### }}}
-#### Status Bar {{{
-bar {
-    font pango:$font
-    position bottom
-    status_command i3status -c ~/.config/i3/i3status.conf
-    tray_output primary
-    bindsym button4 nop
-    bindsym button5 nop
+popup_during_fullscreen smart
+#for_window [class=".*"] border pixel 3
+hide_edge_borders smart
+workspace_layout tabbed
 
-    colors {
-        background #0d0f13
-        statusline #81a1c1
-    }
-}
-########################################################################## }}}
-#### Startup programs {{{
-exec --no-startup-id autorandr -c
+# Includes
+# -----------------------------------------------------------------------------
+include ~/.config/i3/rules
+include ~/.config/i3/binds
+include ~/.config/i3/theme_and_bar
+
+# Startup
+# -----------------------------------------------------------------------------
+#exec --no-startup-id autorandr -c
 exec --no-startup-id hsetroot -solid '#0d0f13'
-#exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $locker --nofork
-#exec --no-startup-id blueman-applet
-#exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id nm-applet
 #exec --no-startup-id pasystray
 #exec --no-startup-id flameshot
 exec --no-startup-id dunst
 exec --no-startup-id unclutter -b
-exec --no-startup-id xrdb -merge ~/.config/Xresources/Xresources
-exec --no-startup-id xset r rate 300 36
-exec --no-startup-id xset fp rehash
-exec --no-startup-id xsetroot -cursor_name left_ptr
 exec --no-startup-id setxkbmap es
-########################################################################## }}}
+exec_always --no-startup-id picom --daemon --config ~/.config/picom/picom.conf

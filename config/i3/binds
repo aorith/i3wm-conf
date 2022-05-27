@@ -1,0 +1,137 @@
+bindsym $mod+masculine exec --no-startup-id ~/.config/i3/scripts/scratchpad-term.sh
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Capture screen
+bindsym Print exec --no-startup-id flameshot gui
+
+# start a terminal
+#bindsym $mod+Return exec xterm -name 'tmux' -e 'tmux -u attach || tmux -u new-session'
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec alacritty -e ranger
+
+# kill focused window
+bindsym $mod+q kill
+
+# Rofi
+bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#0F4C0F' -sf '#FAFAFA' -fn 'Iosevka Aile-14' -p '  >'"
+bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
+bindsym $mod+Shift+space exec --no-startup-id rofi -show run
+#bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-thumbnail
+bindsym Mod1+Tab focus right
+
+# Sticky toggle
+bindsym $mod+i sticky toggle
+
+# focus parent/child
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
+
+# marks to swap containers
+bindsym $mod+m unmark toswap; mark toswap
+bindsym $mod+Shift+m swap container with mark toswap
+
+
+################### FOCUS #############################################################
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+#######################################################################################
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# enter fullscreen mode for the focused container
+bindsym $mod+z fullscreen toggle
+
+# Change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+s layout stacked
+bindsym $mod+t layout tabbed
+bindsym $mod+s layout toggle split
+
+# splits
+bindsym $mod+v split v
+bindsym $mod+b split h
+
+# toggle tiling / floating
+bindsym $mod+f floating toggle; border normal 2
+# change focus between tiling / floating windows
+bindsym $mod+Shift+f focus mode_toggle
+# toggle border
+bindsym $mod+comma border toggle
+
+#### Workspaces {{{
+# Move workspaces around monitors
+bindsym $mod+Left move workspace to output left
+bindsym $mod+Right move workspace to output right
+bindsym $mod+Up move workspace to output up
+bindsym $mod+Down move workspace to output down
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+
+set $mode_display (a)Auto // (d)DP1, (v)VGA1, (l)LVDS1 // (S-d)DP1 off, (S-v)VGA1 off, (S-l) LVDS1 off
+mode "$mode_display" {
+    bindsym a exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh auto, mode "default"
+
+    bindsym d exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh on DP1, mode "default"
+    bindsym v exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh on VGA1, mode "default"
+    bindsym l exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh on LVDS1, mode "default"
+
+    bindsym Shift+d exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh off DP1, mode "default"
+    bindsym Shift+v exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh off VGA1, mode "default"
+    bindsym Shift+l exec --no-startup-id ~/.config/i3/scripts/i3-monitor-setup.sh off LVDS1, mode "default"
+
+    # back to normal
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+F3 mode "$mode_display"
+
+
+set $mode_system (s)Shutdown, (r)Reboot, (l)Lock, (q)Quit, (d)Suspend, (x)Reload-i3, (Shift+X)Restart-i3
+mode "$mode_system" {
+    bindsym s exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym l exec --no-startup-id $locker, mode "default"
+    bindsym q exec --no-startup-id i3-msg exit, mode "default"
+    bindsym d exec --no-startup-id $locker && systemctl suspend, mode "default"
+    bindsym x exec --no-startup-id i3-msg reload, mode "default"
+    bindsym Shift+x exec --no-startup-id i3-msg restart, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+shift+q mode "$mode_system"
