@@ -1,3 +1,11 @@
+# q (quit), (0) reset, (f) flashlight, (ctrl+wheel) flashlight zoom
+# https://github.com/tsoding/boomer
+bindsym $mod+Shift+p exec --no-startup-id boomer
+
+# https://github.com/xrelkd/clipcat
+bindsym $mod+o exec clipcat-menu insert
+bindsym $mod+Shift+o exec clipcat-menu remove
+
 bindsym $mod+masculine exec --no-startup-id ~/.config/i3/scripts/scratchpad-term.sh
 
 # Use pactl to adjust volume in PulseAudio.
@@ -146,4 +154,4 @@ mode "$mode_gromit" {
     bindsym q exec gromit-mpx --quit, mode "default"
     bindsym m mode "default"
 }
-bindsym $mod+p exec gromit-mpx --active, mode "$mode_gromit"
+bindsym $mod+p exec bash -lic 'gromit-mpx --active', mode "$mode_gromit"

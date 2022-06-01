@@ -44,11 +44,8 @@ workspace $ws2 output $output2
 # -----------------------------------------------------------------------------
 
 font pango:$font
-title_align center
 focus_follows_mouse no
 
-default_border pixel 3
-default_floating_border pixel 3
 floating_modifier $mod
 floating_minimum_size 55 x 30
 
@@ -66,14 +63,11 @@ include ~/.config/i3/theme_and_bar
 # Startup
 # -----------------------------------------------------------------------------
 #exec --no-startup-id autorandr -c
-exec --no-startup-id hsetroot -solid '#0d0f13'
-exec --no-startup-id xss-lock --transfer-sleep-lock -- $locker --nofork
+exec --no-startup-id setxkbmap es
+exec --no-startup-id dunst
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
-#exec --no-startup-id pasystray
-#exec --no-startup-id flameshot
-exec --no-startup-id dunst
-exec --no-startup-id unclutter -b
-exec --no-startup-id setxkbmap es
+exec --no-startup-id pasystray
 exec_always --no-startup-id feh --bg-scale Pictures/wallpaper.png
 exec_always --no-startup-id picom --daemon --config ~/.config/picom/picom.conf
+exec_always --no-startup-id clipcatd --replace

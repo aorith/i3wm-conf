@@ -8,7 +8,7 @@ export XDG_SESSION_TYPE="X11"
 xrdb -merge ~/.config/Xresources/Xresources
 xset r rate 300 36 || exit 26
 xset fp rehash || exit 26
-xsetroot -cursor_name left_ptr || exit 26
+#xsetroot -cursor_name left_ptr || exit 26
 
 # NOTE: Logitech MX Keys FN keys can be switched by pressing fn+ESC
 #xmodmap - <<EOF
@@ -17,7 +17,7 @@ xsetroot -cursor_name left_ptr || exit 26
 #EOF
 
 #autocutsel -fork &
-autorandr -c
+#autorandr -c
 
 if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
     eval "$(dbus-launch --exit-with-session --sh-syntax)" || exit 26

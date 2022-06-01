@@ -11,7 +11,7 @@ _create_links() {
     local basename basedir file src tgt
     basename="$1" # home, config
     pushd "$basename" >/dev/null || return 1
-    [[ -f basedir ]] || _err "Missing 'basedir' file in '$basename'."
+    [[ -f basedir ]] || { printf "\n? Ignoring '%s', missing 'basedir' file.\n\n" "$basename"; popd >/dev/null || return 1; return 0; }
     basedir=$(head -1 basedir)
     echo "+ Linking folder/files in '$basename'..."
     find . -maxdepth 1 -mindepth 1 \( -type f -o -type d \) -not -name 'basedir' -print0 | \

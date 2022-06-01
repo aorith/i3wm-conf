@@ -9,7 +9,7 @@ URLS=(
     "https://github.com/be5invis/Iosevka/releases/download/v15.3.1/ttc-sgr-iosevka-fixed-15.3.1.zip"
 )
 
-for url in ${URLS[@]}; do
+for url in "${URLS[@]}"; do
     echo "$url"
     curl --fail -L -o ./fonts.zip "$url" && unzip -u -o fonts.zip && rm -f fonts.zip
 done

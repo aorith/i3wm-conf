@@ -3,13 +3,17 @@
 #include "apprentice"
 
 !-------- Xft Settings {{{
-Xft.dpi: 108
+Xft.dpi: 120
 Xft.autohint: false
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintsfull
 Xft.hinting: true
 Xft.antialias: true
 Xft.rgba: rgba
+!-------- }}}
+!-------- Xcursor {{{
+Xcursor.size: 36
+Xcursor.theme: Adwaita
 !-------- }}}
 !-------- Rofi {{{
 ! https://comfoxx.github.io/rofi-old-generator/p11-Generator.html
@@ -83,3 +87,33 @@ rofi.color-urgent: #000000, #b3e774, #000000, #b3e774, #000000
 *XTerm*visualBell: true
 ! }}}
 !-------- }}}
+
+!-------- Zutty Settings {{{
+Zutty.title:                   Zutty
+Zutty.geometry:                120x45
+Zutty.altScroll:               true
+Zutty.boldColors:              false
+Zutty.font:                    9x18
+Zutty.fontsize:                18
+Zutty.fontpath:                /home/aorith/.local/share/fonts:/usr/share/fonts
+Zutty.fg:                      #00aa80
+Zutty.bg:                      #171717
+Zutty.cr:                      #0f0
+
+Zutty.color0:                  #1c1b19
+Zutty.color1:                  #ef2f27
+Zutty.color2:                  #519f50
+Zutty.color3:                  #fbb829
+Zutty.color4:                  #2c78bf
+Zutty.color5:                  #e02c6d
+Zutty.color6:                  #0aaeb3
+Zutty.color7:                  #d0bfa1
+Zutty.color8:                  #918175
+Zutty.color9:                  #f75341
+Zutty.color10:                 #98bc37
+Zutty.color11:                 #fed06e
+Zutty.color12:                 #68a8e4
+Zutty.color13:                 #ff5c8f
+Zutty.color14:                 #53fde9
+Zutty.color15:                 #fce8c3
+! }}}
