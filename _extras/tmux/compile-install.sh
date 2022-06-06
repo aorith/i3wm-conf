@@ -8,7 +8,7 @@ rm -rf tmux
 mkdir -p "${HOME}/.local/etc/xdg"
 
 echo "Installing dependencies..."
-sudo apt install automake libevent-dev
+sudo apt install automake libevent-dev bison
 
 git clone --depth=1 --branch="$REF" https://github.com/tmux/tmux.git
 rm -rf tmux/.git
