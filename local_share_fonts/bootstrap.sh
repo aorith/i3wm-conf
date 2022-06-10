@@ -5,7 +5,7 @@ set -e
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts || exit 1
 
-sudo apt install zip unzip curl
+[[ -f /etc/NIXOS ]] || sudo apt install zip unzip curl
 
 URLS=(
     "https://github.com/be5invis/Iosevka/releases/download/v15.3.1/ttf-iosevka-aile-15.3.1.zip"

@@ -13,3 +13,9 @@ for_window [instance="scratchpad.tmux"] move scratchpad, floating enable
 for_window [instance="pavucontrol"] floating enable
 for_window [class=".virt-manager-wrapped"] floating enable
 for_window [class=".arandr-wrapped"] floating enable
+
+# Workspaces
+# -----------------------------------------------------------------------------
+# Ferdium: Con class no funciona, se debe usar instance, igualmente lo dejo puesto.
+for_window [class="(i?)ferdium"] move to workspace $ws9, workspace $ws9
+for_window [instance="(i?)ferdium"] move to workspace $ws9, workspace $ws9

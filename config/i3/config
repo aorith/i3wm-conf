@@ -6,7 +6,7 @@ set $mod Mod4
 set $font DejaVu Sans Mono 9
 set $statusfont Iosevka Aile 10
 set $locker ~/.config/i3/scripts/lock.sh
-set $terminal alacritty
+set $terminal xterm
 
 set $left h
 set $right l
@@ -15,30 +15,30 @@ set $down j
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: Chat"
-set $ws2 "2: Web"
+set $ws1 "1: Web"
+set $ws2 "2: Term"
 set $ws3 "3: Dev"
 set $ws4 "4: Misc"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8: Extra"
-set $ws9 "9: Other"
-set $ws10 "10"
+set $ws9 "9: Chat"
+set $ws10 "10: Etc"
 
-set $output1 HDMI-0
-set $output2 DP-0
+set $output1 DP-0
+set $output2 HDMI-0
 
 workspace $ws1 output $output1
-workspace $ws2 output $output2
-workspace $ws3 output $output2
-workspace $ws4 output $output2
-workspace $ws5 output $output2
-workspace $ws6 output $output2
-workspace $ws7 output $output2
+workspace $ws2 output $output1
+workspace $ws3 output $output1
+workspace $ws4 output $output1
+workspace $ws5 output $output1
+workspace $ws6 output $output1
+workspace $ws7 output $output1
 workspace $ws8 output $output1
 workspace $ws9 output $output2
-workspace $ws2 output $output2
+workspace $ws10 output $output2
 
 # Basic Config
 # -----------------------------------------------------------------------------
@@ -50,9 +50,10 @@ floating_modifier $mod
 floating_minimum_size 55 x 30
 
 popup_during_fullscreen smart
-#for_window [class=".*"] border pixel 3
 hide_edge_borders smart
 workspace_layout tabbed
+
+for_window [all] title_window_icon padding 3px
 
 # Includes
 # -----------------------------------------------------------------------------
@@ -62,12 +63,13 @@ include ~/.config/i3/theme_and_bar
 
 # Startup
 # -----------------------------------------------------------------------------
-#exec --no-startup-id autorandr -c
+exec --no-startup-id xrdb -merge ~/.config/Xresources/Xresources
+exec --no-startup-id xset r rate 300 36
+exec --no-startup-id xset fp rehash
 exec --no-startup-id setxkbmap es
 exec --no-startup-id dunst
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
-exec --no-startup-id pasystray
-exec_always --no-startup-id feh --bg-scale Pictures/wallpaper.png
 exec_always --no-startup-id picom --daemon --config ~/.config/picom/picom.conf
-exec_always --no-startup-id clipcatd --replace
+#exec_always --no-startup-id clipcatd --replace
+exec_always --no-startup-id feh --no-fehbg --bg-scale ~/githome/i3wm-conf/_extras/wallpapers/mountains.png ~/githome/i3wm-conf/_extras/wallpapers/all_pixels.png

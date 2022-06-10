@@ -2,7 +2,7 @@ bar {
   font pango:$statusfont
   position bottom
   status_command i3status -c ~/.config/i3/i3status.conf
-  tray_output primary
+  tray_output $output1
   bindsym button4 nop
   bindsym button5 nop
 }

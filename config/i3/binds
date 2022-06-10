@@ -1,10 +1,14 @@
+# Change opacity of current window
+bindsym $mod+o exec --no-startup-id picom-trans --current --opacity=97 --toggle
+bindsym $mod+Shift+o exec --no-startup-id picom-trans --current --opacity=100 --toggle
+
 # q (quit), (0) reset, (f) flashlight, (ctrl+wheel) flashlight zoom
 # https://github.com/tsoding/boomer
-bindsym $mod+Shift+p exec --no-startup-id boomer
+bindsym $mod+Shift+g exec --no-startup-id boomer
 
 # https://github.com/xrelkd/clipcat
-bindsym $mod+o exec clipcat-menu insert
-bindsym $mod+Shift+o exec clipcat-menu remove
+bindsym $mod+p exec clipcat-menu insert
+bindsym $mod+Shift+p exec clipcat-menu remove
 
 bindsym $mod+masculine exec --no-startup-id ~/.config/i3/scripts/scratchpad-term.sh
 
@@ -20,8 +24,8 @@ bindsym Print exec --no-startup-id flameshot gui
 
 # start a terminal
 #bindsym $mod+Return exec xterm -name 'tmux' -e 'tmux -u attach || tmux -u new-session'
-bindsym $mod+Return exec alacritty
-bindsym $mod+Shift+Return exec alacritty -e ranger
+bindsym $mod+Return exec $terminal
+bindsym $mod+Shift+Return exec $terminal -e ranger
 
 # kill focused window
 bindsym $mod+q kill
@@ -31,7 +35,8 @@ bindsym $mod+d exec "dmenu_run -nf '#BBBBBB' -nb '#222222' -sb '#0F4C0F' -sf '#F
 bindsym $mod+space exec --no-startup-id rofi -show drun -show-icons
 bindsym $mod+Shift+space exec --no-startup-id rofi -show run
 #bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-thumbnail
-bindsym Mod1+Tab focus right
+bindsym $mod+Tab exec --no-startup-id rofi -show window -show-icons
+bindsym Mod1+Tab exec --no-startup-id rofi -show window -show-icons
 
 # Sticky toggle
 bindsym $mod+i sticky toggle
@@ -146,12 +151,12 @@ bindsym $mod+shift+q mode "$mode_system"
 
 set $mode_gromit (t) Toggle, (c) Clear, (u) Undo, (r) Redo, (v) Visibility, (q) Quit, (m) Leave mode
 mode "$mode_gromit" {
-    bindsym t exec bash -lic 'gromit-mpx --toggle'
-    bindsym c exec gromit-mpx --clear
-    bindsym u exec gromit-mpx --undo
-    bindsym r exec gromit-mpx --redo
-    bindsym v exec gromit-mpx --visibility
-    bindsym q exec gromit-mpx --quit, mode "default"
+    bindsym t exec --no-startup-id ~/.config/i3/scripts/gromit.sh toggle
+    bindsym c exec --no-startup-id ~/.config/i3/scripts/gromit.sh clear
+    bindsym u exec --no-startup-id ~/.config/i3/scripts/gromit.sh undo
+    bindsym r exec --no-startup-id ~/.config/i3/scripts/gromit.sh redo
+    bindsym v exec --no-startup-id ~/.config/i3/scripts/gromit.sh visibility
+    bindsym q exec --no-startup-id ~/.config/i3/scripts/gromit.sh quit, mode "default"
     bindsym m mode "default"
 }
-bindsym $mod+p exec bash -lic 'gromit-mpx --active', mode "$mode_gromit"
+bindsym $mod+g exec --no-startup-id ~/.config/i3/scripts/gromit.sh active, mode "$mode_gromit"

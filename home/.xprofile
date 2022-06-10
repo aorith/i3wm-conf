@@ -1,0 +1,17 @@
+# vim: ft=bash
+
+export XDG_CURRENT_DESKTOP="i3:xfce"
+export XDG_SESSION_DESKTOP="i3:xfce"
+export XDG_CURRENT_SESSION="i3:xfce"
+export XDG_SESSION_TYPE="X11"
+source "${HOME}/githome/dotfiles/topics/shell/etc/bash/constants.bash"
+
+if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+    eval "$(dbus-launch --exit-with-session --sh-syntax)" || exit 26
+fi
+if command -v dbus-update-activation-environment >/dev/null; then
+    dbus-update-activation-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE
+fi
+if command -v systemctl >/dev/null; then
+    systemctl --user import-environment DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE
+fi
