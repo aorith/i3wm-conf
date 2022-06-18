@@ -1,0 +1,6 @@
+# vim: ft=swayconfig
+set $mon4k 'Goldstar Company Ltd LG HDR 4K 0x00005E3A'
+set $mon2k:'Goldstar Company Ltd LG ULTRAGEAR 108MAPN2AW52'
+
+output $mon4k subpixel rgb adaptive_sync on resolution 3840x2160@60Hz position 0 0 scale 2
+output $mon2k subpixel rgb adaptive_sync on resolution 2560x1440@165Hz

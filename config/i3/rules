@@ -4,10 +4,10 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [title="Preferences$"] floating enable
 
-for_window [floating] border normal
 for_window [class="(i?)floating"] floating enable
 for_window [class="Sxiv"] floating enable
 for_window [class="mpv"] floating enable
+for_window [instance="(i?)pcmanfm"] floating enable
 for_window [instance="(i?)floating"] floating enable
 for_window [instance="scratchpad.tmux"] move scratchpad, floating enable
 for_window [instance="pavucontrol"] floating enable
@@ -16,6 +16,6 @@ for_window [class=".arandr-wrapped"] floating enable
 
 # Workspaces
 # -----------------------------------------------------------------------------
-# Ferdium: Con class no funciona, se debe usar instance, igualmente lo dejo puesto.
-for_window [class="(i?)ferdium"] move to workspace $ws9, workspace $ws9
-for_window [instance="(i?)ferdium"] move to workspace $ws9, workspace $ws9
+# Ferdi: Con class no funciona, se debe usar instance, igualmente lo dejo puesto.
+for_window [class="(i?)ferdi"] move to workspace $ws9, workspace $ws9
+for_window [instance="(i?)ferdi"] move to workspace $ws9, workspace $ws9

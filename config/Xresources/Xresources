@@ -1,6 +1,6 @@
 ! vim: fdm=marker foldlevel=0
 
-#include "apprentice"
+#include "base16-default-dark"
 
 !-------- Xft Settings {{{
 Xft.dpi: 120
